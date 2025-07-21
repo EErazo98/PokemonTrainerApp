@@ -1,0 +1,19 @@
+<div class="card-container">
+  <p class="profile-title">{{ readOnly ? name : 'Imágen perfil' }}</p>
+
+  <div class="image-wrapper">
+    <img [src]="imageUrl || defaultImage" alt="Avatar" />
+  </div>
+
+  <div class="upload-wrapper">
+    <label class="upload-button btn-flat waves-effect" *ngIf="!readOnly">
+      <input type="file" hidden (change)="handleFileInput($event)" />
+      <span>Adjunta una foto</span>
+      <i class="material-icons right">cloud_upload</i>
+    </label>
+    <label class="details" *ngIf="readOnly">
+      <p><strong>Pasatiempo:</strong> {{ hobby }}</p>
+      <p><strong>Edad:</strong> {{ age }}</p>
+    </label>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="profile-wrapper">
+  <div class="header-row">
+    <img src="assets/logo-pokemon.png" alt="Pokémon" class="logo" />
+    <div class="header-text">
+      <h2>
+        {{
+        currentStep() === 'info'
+        ? '¡Hola! Configuremos tu perfil'
+        : '¡Ya casi terminamos!'
+        }}
+      </h2>
+      <p>
+        {{
+        currentStep() === 'info'
+        ? 'Queremos conocerte mejor.'
+        : 'Revisa la información y completa lo solicitado'
+        }}
+      </p>
+    </div>
+  </div>
+
+  <div class="profile-container">
+    <div class="left-panel">
+      <app-profile-card *ngIf="currentStep() === 'info'; else nameDisplay" [imageUrl]="imageUrl()"
+        (imageChanged)="updateImage($event)"></app-profile-card>
+
+      <ng-template #nameDisplay>
+        <app-profile-card [imageUrl]="imageUrl()" [name]="userName()" [hobby]="userHobby()" [age]="userAge()"
+          [readOnly]="true"></app-profile-card>
+      </ng-template>
+    </div>
+
+    <div class="right-panel">
+      <app-information *ngIf="currentStep() === 'info'" [imageUrl]="imageUrl()"
+        (formCompleted)="goToLoadingAndNextStep($event)"></app-information>
+
+      <app-pokemon-selection *ngIf="currentStep() === 'pokemon'"
+        (selectionCompleted)="handlePokemonSelected($event)"></app-pokemon-selection>
+
+      <app-stats-summary *ngIf="currentStep() === 'summary'" [selectedIds]="selectedPokemonIds()"
+        (backToPokemon)="goBackToPokemonSelection()"></app-stats-summary>
+    </div>
+  </div>
+
+  <app-loading-spinner *ngIf="currentStep() === 'loading'"></app-loading-spinner>
+</div>

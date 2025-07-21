@@ -1,0 +1,28 @@
+<div class="summary-container">
+    <div class="header-row">
+        <h2>Mis Pokémon</h2>
+        <button class="edit-btn" (click)="onEdit()">✎ Editar</button>
+    </div>
+
+    <cdk-virtual-scroll-viewport class="scroll-viewport" itemSize="260">
+        <div *cdkVirtualFor="let pokemon of pokemons()">
+            <div class="pokemon-card">
+                <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="{{ pokemon.name }}" />
+                <div class="pokemon-stats">
+                    <h3>{{ pokemon.name | titlecase }}</h3>
+                    <p class="type">{{ getTypes(pokemon) }}</p>
+
+                    <div *ngFor="let stat of pokemon.stats" class="stat">
+                        <span>{{ getStatLabel(stat.stat.name) }}</span>
+                        <div class="bar">
+                            <div class="bar-fill" [ngClass]="getBarColor(stat.stat.name)"
+                                [style.width.%]="getStatPercentage(stat.stat.name, stat.base_stat)">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>
