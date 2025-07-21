@@ -1,0 +1,82 @@
+h3 {
+  margin-top: 0;
+  color: #0b2451;
+}
+
+.description {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+  button {
+    padding: 12px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.mat-calendar-body-selected {
+  background-color: #6c2bd9 !important;
+  color: white !important;
+}
+
+mat-form-field.datepicker-field {
+  width: 100%;
+  max-width: 300px;
+}
+
+input[formControlName="hobby"] {
+  width: 100%;
+  max-width: 600px;
+  height: 48px;
+  font-size: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.hobby-autocomplete {
+  position: relative;
+
+  .autocomplete-list {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border-radius: 0 0 8px 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+    border: 1px solid #ddd;
+
+    li {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+
+      &:hover {
+        background: #f1f1f1;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

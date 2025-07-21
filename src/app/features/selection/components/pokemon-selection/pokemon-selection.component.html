@@ -1,0 +1,26 @@
+<div class="pokemon-selection">
+  <h3>Selecciona tus 3 Pokémon favoritos</h3>
+
+  <input type="text" [(ngModel)]="searchTerm" class="search-input" placeholder="🔍 Buscar por índice, nombre..." />
+
+  <div class="swiper pokemon-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let pokemon of filteredPokemons(); let i = index; trackBy: trackByNumber"
+        [class.selected]="selectedPokemons().includes(pokemon.number)" (click)="toggleSelection(pokemon.number)">
+        <div class="pokemon-card">
+          <img [src]="pokemon.image" [alt]="pokemon.name" />
+          <p>#{{ pokemon.number | number:'3.0' }} {{ pokemon.name | titlecase }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="selection-footer">
+    <button class="save-button" (click)="saveSelection()">Guardar Selección</button>
+  </div>
+  <div *ngIf="errorMessage()" class="error-message">
+    {{ errorMessage() }}
+  </div>
+
+</div>

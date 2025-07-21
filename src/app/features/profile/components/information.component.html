@@ -1,0 +1,27 @@
+<h3>Tu información</h3>
+<p class="description">Completa la siguiente información para completar tu perfil</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="Nombre*" formControlName="name" />
+  <div class="input-field hobby-autocomplete">
+    <input type="text" formControlName="hobby" placeholder="Pasatiempo favorito" (input)="onHobbyInput()" />
+    <ul class="autocomplete-list z-depth-1" *ngIf="filteredHobbies.length">
+      <li *ngFor="let hobby of filteredHobbies" (click)="selectHobby(hobby)">
+        {{ hobby }}
+      </li>
+    </ul>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Cumpleaños*</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="birthday" (dateChange)="onBirthdayChange($event)" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+  </mat-form-field>
+
+  <input type="text" formControlName="document" [placeholder]="isAdult() ? 'DUI* (00000000-0)' : 'Carnet de minoridad'"
+    (input)="isAdult() && formatDui()" />
+
+  <button type="button" class="btn" (click)="onSubmit()">Continuar</button>
+
+</form>
